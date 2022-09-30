@@ -76,12 +76,13 @@ func (h *handlerArtikel) CreateArtikel(w http.ResponseWriter, r *http.Request) {
 	dataContex := r.Context().Value("dataFile")
 	filename := dataContex.(string)
 
+	// user_id, _ := strconv.Atoi(r.FormValue("user_id"))
+
 	request := artikelsdto.CreateArtikelRequest{
-		Title: r.FormValue("title"),
-		Desc:  r.FormValue("desc"),
-		Image: filename,
-		// UserId: userId,
-		// User:   models.User{},
+		Title:   r.FormValue("title"),
+		Desc:    r.FormValue("desc"),
+		Image:   filename,
+		User_Id: userId,
 	}
 
 	validation := validator.New()
@@ -94,9 +95,10 @@ func (h *handlerArtikel) CreateArtikel(w http.ResponseWriter, r *http.Request) {
 	}
 
 	artikel := models.Artikel{
-		Title: request.Title,
-		Image: filename,
-		Desc:  request.Desc,
+		Title:  request.Title,
+		Image:  filename,
+		Desc:   request.Desc,
+		UserID: request.User_Id,
 	}
 
 	data, err := h.ArtikelRepository.CreateArtikel(artikel)
@@ -190,7 +192,5 @@ func convertResponseArtikel(u models.Artikel) artikelsdto.ArtikelResponse {
 		Title: u.Title,
 		Image: u.Image,
 		Desc:  u.Desc,
-		// User:   u.User,
-		// UserId: u.UserId,
 	}
 }

@@ -3,7 +3,7 @@ package models
 // gorm berfungsi untuk mengatur tipe data atau custom tipe data
 
 type User struct {
-	ID       int    `json:"id" gorm:"primary_key:auto_increment"`
+	ID       int    `json:"id" gorm:"User_Id"`
 	FullName string `json:"name"`
 	Email    string `json:"email" gorm:"type: varchar(255)"`
 	Password string `json:"password" gorm:"type: varchar(255)"`

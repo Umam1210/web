@@ -118,7 +118,7 @@ function ModalLogin() {
               <Form.Label>Password</Form.Label>
               <input
                 type="password"
-                placeholder=""
+                placeholder="password"
                 value={password}
                 name="password"
                 onChange={handleChange}

@@ -7,6 +7,4 @@ type UserResponse struct {
 	Password string `json:"password" form:"password" validate:"required"`
 	Phone    string `json:"phone"`
 	Addres   string `json:"addres"`
-	// Artikel   models.Artikel `json:"-"`
-	// ArtikelId int            `json:"artikel_id"`
 }

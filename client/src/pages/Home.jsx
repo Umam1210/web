@@ -24,7 +24,7 @@ function Home() {
             <div>
                 <Journey />
                 <div className="input-group px-5 ">
-                    <input type="text" className="form-control" placeholder="Searcg" aria-label="Username" aria-describedby="basic-addon1" />
+                    <input type="text" className="form-control" placeholder="Search" aria-label="Username" aria-describedby="basic-addon1" />
                    
                         <Button>search</Button>
                    

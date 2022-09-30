@@ -6,8 +6,6 @@ type CreateUserRequest struct {
 	Password string `json:"password" form:"password" validate:"required"`
 	Phone    string `json:"phone" form:"phone" validate:"required"`
 	Addres   string `json:"addres" form:"addres" validate:"required"`
-	// Artikel   models.Artikel `json:"-"`
-	// ArtikelId int            `json:"artikel_id"`
 }
 
 type UpdateUserRequest struct {

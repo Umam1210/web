@@ -95,7 +95,7 @@ function ModalRegister() {
             <Button variant="primary" onClick={handleShow}>
                 Register
             </Button>
-            {message && message}
+            {/* {message && message} */}
 
             <form onSubmit={(e) => handleSubmit.mutate(e)} >
             <Modal show={show} onHide={handleClose}>
@@ -169,7 +169,7 @@ function ModalRegister() {
                 <Modal.Footer>
                     <Button variant="primary" 
                         onClick={(e) => {
-                        // handleClose()
+                        handleClose()
                         handleSubmit.mutate(e)
                         }} 
                         className="w-100"
