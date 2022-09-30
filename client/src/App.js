@@ -13,6 +13,7 @@ import {useContext, useEffect} from 'react'
 import {UserContext} from './context/UserContext'
 import {API, setAuthToken} from './config/api'
 import { Routes, Route, useNavigate, Redirect, useParams, Navigate } from 'react-router-dom'
+import { Card } from 'react-bootstrap';
 
 
 if (localStorage.token) {
@@ -72,7 +73,9 @@ function App() {
       <Route path="/bookmark" element={<Bookmark />}/>
       <Route path="/profile" element={<Profile />}/>
       <Route path="/add-journey" element={<AddJourney />}/>
-      <Route path="/detail" element={<Detail />}/>
+      <Route path="/detail/:id" element={<Detail />}/>
+      <Route path="/artikel/:id" element={<Card />}/>
+
     </Routes>
   );
 }

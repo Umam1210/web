@@ -2,13 +2,27 @@ import React from 'react'
 import Navbarlogin from '../components/NavbarLogin'
 import image from '../image/air-terjun.jpg'
 
+import { useParams, useNavigate } from 'react-router-dom';
+import { useQuery, useMutation } from 'react-query';
+import { UserContext } from '../context/UserContext'
+import { useContext } from 'react'
+import { API } from '../config/api'
+
 function Detail() {
+
+  let { id } = useParams();
+    let { data } = useQuery('detailCache', async () => {
+        const response = await API.get('/artikel/' + id);
+        console.log("ini data", response)
+        return response.data.data;
+    });
+
   return (
     <>
     <Navbarlogin />
     <div className='d-flex mb-3 my-4 mx-5'>
         <h2 className='me-auto p-2'>
-          Bersemayam di tanah Dewata  
+          {data?.title}  
         </h2>
         <h6 className='p-2'>Khaerul Umam</h6>
     </div>
