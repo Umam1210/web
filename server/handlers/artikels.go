@@ -49,7 +49,7 @@ func (h *handlerArtikel) GetArtikel(w http.ResponseWriter, r *http.Request) {
 
 	id, _ := strconv.Atoi(mux.Vars(r)["id"])
 
-	var artikels models.Artikel
+	var artikel models.Artikel
 
 	artikel, err := h.ArtikelRepository.GetArtikel(id)
 	if err != nil {
@@ -59,7 +59,7 @@ func (h *handlerArtikel) GetArtikel(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	artikels.Image = os.Getenv("PATH_FILE") + artikels.Image
+	artikel.Image = os.Getenv("PATH_FILE") + artikel.Image
 
 	w.WriteHeader(http.StatusOK)
 	response := dto.SuccessResult{Code: http.StatusOK, Data: convertResponseArtikel(artikel)}

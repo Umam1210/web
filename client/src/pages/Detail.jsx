@@ -28,9 +28,9 @@ function Detail() {
     </div>
         <span style={{color:"#3B97D3"}} className=" mx-5"> 12 Oktober 2025</span>
         <div>
-        <img src={image} alt="" className='rounded mx-5 my-4' width={"97%"} />
+        <img src={data?.image} alt="" className='rounded mx-5 my-4' width={"97%"} />
         </div>
-        <p className='mx-5'>tanah dewata</p>
+        <p className='mx-5'>{data?.desc}</p>
     </>
 
 

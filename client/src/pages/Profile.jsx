@@ -6,6 +6,7 @@ import { useContext, useEffect } from 'react';
 import { UserContext } from '../context/UserContext';
 import { useQuery } from 'react-query'
 import { API } from '../config/api'
+import CardProfile from '../components/CardProfile';
 
 function Profile() {
 
@@ -14,11 +15,11 @@ function Profile() {
   // console.log("state", state)
   let { data } = useQuery('usersCache', async () => {
       const response = await API.get('/check-auth');
-      console.log("ini response",response)
+      // console.log("ini response",response)
       return response.data.data;
     });
 
-    console.log(" ini data", data);
+    // console.log(" ini data", data);
 
 
     const checkUser = async () => {
@@ -53,6 +54,7 @@ function Profile() {
     }, [])
 
 
+
   return (
     <>
     <Navbarlogin />
@@ -66,6 +68,9 @@ function Profile() {
     <div className="d-flex justify-content-center">
        <h5>{data?.email}</h5>
     </div>
+
+    <CardProfile />
+
     </>
   )
 }
