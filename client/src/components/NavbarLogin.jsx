@@ -26,7 +26,7 @@ function Navbarlogin() {
                     <Nav className="me-auto">
                     </Nav>
                     <Nav>
-                        <Nav.Link eventKey={2} href="#memes">
+                        <Nav.Link eventKey={2} >
                      <Tooltip />
                         </Nav.Link>
                     </Nav>

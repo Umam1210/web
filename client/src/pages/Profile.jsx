@@ -15,7 +15,7 @@ function Profile() {
   // console.log("state", state)
   let { data } = useQuery('usersCache', async () => {
       const response = await API.get('/check-auth');
-      // console.log("ini response",response)
+      console.log("ini response profil",response)
       return response.data.data;
     });
 

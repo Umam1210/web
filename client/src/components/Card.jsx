@@ -1,6 +1,5 @@
 import React from 'react'
 import {Card, Row} from 'react-bootstrap'
-import image from '../image/air-terjun.jpg'
 import book from '../image/Bookmark2.png'
 
 import { Link } from "react-router-dom";

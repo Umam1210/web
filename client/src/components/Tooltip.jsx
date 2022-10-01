@@ -20,6 +20,10 @@ function Tooltip() {
     setTarget(event.target);
   };
 
+  function refreshPage() {
+    window.location.reload();
+  }
+
   return (
     <div ref={ref}>
       <p onClick={handleClick} className="rounded" variant='light'>
@@ -34,27 +38,29 @@ function Tooltip() {
       >
         <Popover id="popover-contained">
           <Link to="/profile">
-          <Popover.Header as="h3">
-            <img src={profile} alt="" className='me-3'/>
-            Profile
-          </Popover.Header>
+              {/* <button onClick={refreshPage}> */}
+            <Popover.Header as="h3">
+              <img src={profile} alt="" className='me-3' />
+              Profile
+            </Popover.Header>
+              {/* </button> */}
           </Link>
           <Popover.Header as="h3">
             <Link to="/add-journey">
-          <img src={journey} alt="" className='me-3'/>
-            New Journey
+              <img src={journey} alt="" className='me-3' />
+              New Journey
             </Link>
-            </Popover.Header>
+          </Popover.Header>
           <Popover.Header as="h3">
             <Link to="/bookmark">
-          <img src={bookmark} alt="" className='me-4'/>
-            Bookmark
+              <img src={bookmark} alt="" className='me-4' />
+              Bookmark
             </Link>
-            </Popover.Header>
+          </Popover.Header>
           <Popover.Body>
             <Link to="/">
-          <img src={logout} alt="" className='me-3'/>
-            <strong>Logout</strong>
+              <img src={logout} alt="" className='me-3' />
+              <strong>Logout</strong>
             </Link>
           </Popover.Body>
         </Popover>

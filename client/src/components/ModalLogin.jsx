@@ -78,7 +78,7 @@ function ModalLogin() {
     } catch (error) {
       const alert = (
         <Alert variant="danger" className="py-1">
-          Login failed
+        Wrong Email or Password
         </Alert>
       );
       setMessage(alert);
@@ -90,7 +90,7 @@ function ModalLogin() {
 
   return (
     <>
-      <Button variant="" className='border border-light text-light btn btn-secondary' onClick={handleShow}>
+      <Button variant="" className='border border-light text-dark btn btn-light' onClick={handleShow}>
         Login
       </Button>
       <form onSubmit={(e) => handleSubmit.mutate(e)}>

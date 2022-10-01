@@ -14,6 +14,8 @@ import {UserContext} from './context/UserContext'
 import {API, setAuthToken} from './config/api'
 import { Routes, Route, useNavigate, Redirect, useParams, Navigate } from 'react-router-dom'
 import { Card } from 'react-bootstrap';
+import DetailLogin from './pages/DetailLogin';
+import CardLogin from './components/CardLogin';
 
 
 if (localStorage.token) {
@@ -76,6 +78,15 @@ function App() {
       <Route path="/detail/:id" element={<Detail />}/>
       <Route path="/artikel/:id" element={<Card />}/>
 
+
+
+      <Route path="/detail-after-login/:id" element={<DetailLogin />}/>
+      <Route path="/artikel-after-login/:id" element={<CardLogin />}/>
+
+
+
+
+      
     </Routes>
   );
 }
