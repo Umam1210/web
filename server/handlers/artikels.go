@@ -76,8 +76,6 @@ func (h *handlerArtikel) CreateArtikel(w http.ResponseWriter, r *http.Request) {
 	dataContex := r.Context().Value("dataFile")
 	filename := dataContex.(string)
 
-	// user_id, _ := strconv.Atoi(r.FormValue("user_id"))
-
 	request := artikelsdto.CreateArtikelRequest{
 		Title:   r.FormValue("title"),
 		Desc:    r.FormValue("desc"),
@@ -192,5 +190,6 @@ func convertResponseArtikel(u models.Artikel) artikelsdto.ArtikelResponse {
 		Title: u.Title,
 		Image: u.Image,
 		Desc:  u.Desc,
+		User:  u.User,
 	}
 }

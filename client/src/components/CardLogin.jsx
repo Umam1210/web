@@ -26,7 +26,7 @@ function CardLogin() {
           return (
             <Card style={{ width: '18rem' }} className="my-4 mx-5">
               <img src={book} alt="" className='position-absolute top-0 end-0 m-3' />
-              <Link to={`/detail-after-login/${item.id}`} className=''>
+              <Link to={`/detail-after-login/${item?.id}`} className='text-decoration-none text-dark'>
                 <Card.Img variant="top" src={item?.image} className="pt-2" />
                 <Card.Body>
                   <Card.Title>{item?.title}</Card.Title>

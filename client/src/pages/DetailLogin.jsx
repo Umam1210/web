@@ -1,37 +1,41 @@
 import React from 'react'
-import Navbarlogin from '../components/NavbarLogin'
-import image from '../image/air-terjun.jpg'
-
-import { useParams, useNavigate } from 'react-router-dom';
-import { useQuery, useMutation } from 'react-query';
-import { UserContext } from '../context/UserContext'
-import { useContext } from 'react'
-import { API } from '../config/api'
 import NavbarUser from '../components/Navbar';
+
+import { useParams } from 'react-router-dom';
+import { useQuery } from 'react-query';
+import { API } from '../config/api'
 
 function DetailLogin() {
 
   let { id } = useParams();
-    let { data } = useQuery('detailCache', async () => {
-        const response = await API.get('/artikel/' + id);
-        console.log("ini data", response)
-        return response.data.data;
-    });
+  let { data } = useQuery('detailCache', async () => {
+    const response = await API.get('/artikel/' + id);
+    console.log("ini data", response)
+    return response.data.data;
+  });
+
+  
+  let today = new Date();
+
+  let date = today.getDate() + "-" + parseInt(today.getMonth() + 1) + "-" + today.getFullYear();
+
 
   return (
     <>
-     <NavbarUser />
-        <div className='d-flex mb-3 my-4 mx-5'>
+      <NavbarUser />
+      <div className='d-flex mb-3 my-4 mx-5'>
         <h2 className='me-auto p-2'>
-          {data?.title}  
+          {data?.title}
         </h2>
-        <h6 className='p-2'>Khaerul Umam</h6>
-    </div>
-        <span style={{color:"#3B97D3"}} className=" mx-5"> 12 Oktober 2025</span>
-        <div>
-        <img src={data?.image} alt="" className='rounded mx-5 my-4' width={"97%"} />
-        </div>
-        <p className='mx-5'>{data?.desc}</p>
+        <h6 className='mx-5' style={{ color: "#3B97D3" }}>
+          {data?.user.name}
+          </h6>
+      </div>
+      <span style={{ color: "#3B97D3" }} className=" mx-5">{date}</span>
+      <div className='px-5 py-3'>
+        <img src={data?.image} alt="" className='rounded' width={"97%"} />
+      </div>
+      <p className='mx-5'>{data?.desc}</p>
     </>
 
 

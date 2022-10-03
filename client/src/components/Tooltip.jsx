@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react';
-import Button from 'react-bootstrap/Button';
 import Overlay from 'react-bootstrap/Overlay';
 import Popover from 'react-bootstrap/Popover';
 import cat from '../image/cat.jpeg'
@@ -7,7 +6,7 @@ import profile from '../image/user 2.png'
 import journey from '../image/daun.png'
 import bookmark from '../image/Vector.png'
 import logout from '../image/logout 1.png'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 function Tooltip() {
@@ -15,14 +14,22 @@ function Tooltip() {
   const [target, setTarget] = useState(null);
   const ref = useRef(null);
 
+
+  const Navigate = useNavigate()
+
+  const handleLogout = () => {
+    localStorage.removeItem("token")
+    Navigate('/')
+  }
+
   const handleClick = (event) => {
     setShow(!show);
     setTarget(event.target);
   };
 
-  function refreshPage() {
-    window.location.reload();
-  }
+  // function profil() {
+  //   Navigate('/profile')
+  // }
 
   return (
     <div ref={ref}>
@@ -37,31 +44,30 @@ function Tooltip() {
         containerPadding={20}
       >
         <Popover id="popover-contained">
-          <Link to="/profile">
-              {/* <button onClick={refreshPage}> */}
+          <Link to="/profile" className='text-decoration-none text-dark'>
             <Popover.Header as="h3">
               <img src={profile} alt="" className='me-3' />
               Profile
             </Popover.Header>
-              {/* </button> */}
           </Link>
           <Popover.Header as="h3">
-            <Link to="/add-journey">
+            <Link to="/add-journey" className='text-decoration-none text-dark'>
               <img src={journey} alt="" className='me-3' />
               New Journey
             </Link>
           </Popover.Header>
           <Popover.Header as="h3">
-            <Link to="/bookmark">
+            <Link to="/bookmark" className='text-decoration-none text-dark'>
               <img src={bookmark} alt="" className='me-4' />
               Bookmark
             </Link>
           </Popover.Header>
-          <Popover.Body>
-            <Link to="/">
-              <img src={logout} alt="" className='me-3' />
-              <strong>Logout</strong>
-            </Link>
+          <Popover.Body
+            onClick={handleLogout}
+
+          >
+            <img src={logout} alt="" className='me-3' />
+            <strong>Logout</strong>
           </Popover.Body>
         </Popover>
       </Overlay>

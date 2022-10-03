@@ -6,29 +6,34 @@ import text2 from '../image/text2.png'
 import Journey from '../components/Journey'
 import book from '../image/Bookmark2.png'
 
-import { Button, Card, Row, Form, InputGroup, } from 'react-bootstrap'
-// import CardBookmark from '../components/Card'
-// import CardLogin from '../components/CardLogin'
-
+import { Card, Row, Form, InputGroup, } from 'react-bootstrap'
 import { Link } from "react-router-dom";
-import { useContext } from 'react'
-import { UserContext } from '../context/UserContext'
 import { useQuery } from 'react-query'
 import { API } from '../config/api'
 import { useState } from 'react'
+import ModalLogin from '../components/ModalLogin'
 
 function Home() {
 
     const [search, setSearch] = useState('');
+    const [show, setShow] = useState(false);
 
-    const state = useContext(UserContext)
-    console.log("state", state)
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+
     let { data } = useQuery('artikelsCache', async () => {
         const response = await API.get('/artikels');
         // console.log("ini response",response)
         return response.data.data;
     });
-    console.log("ini", data);
+    // console.log("ini", data);
+
+
+    function login() {
+        handleShow(<ModalLogin />)
+        alert("hallo")
+    }
 
     return (
         <>
@@ -45,10 +50,8 @@ function Home() {
             <div>
                 <Journey />
                 <div className="input-group px-5 ">
-                    <Form  className='w-100'>
+                    <Form className='w-100'>
                         <InputGroup className='my-3 w-100'>
-
-                            {/* onChange for search */}
                             <Form.Control
                                 onChange={(e) => setSearch(e.target.value)}
                                 placeholder='Search here...'
@@ -57,33 +60,31 @@ function Home() {
                         </InputGroup>
                     </Form>
                 </div>
-                <div>
-                    {/* <CardBookmark /> */}
-                    {/* <CardLogin /> */}
-                    <Row xs={1} md={4} className="mx-5 px-0">
-                        {data?.filter((item) => {
-                            return search.toLowerCase() === ''
-                                ? item
-                                : item.title.toLowerCase().includes(search);
-                        }).map((item, id) => {
-                            return (
-                                <Card style={{ width: '18rem' }} className="my-4 mx-5">
-                                    <img src={book} alt="" className='position-absolute top-0 end-0 m-3' />
-                                    <Link to={`/detail-after-login/${item.id}`} className=''>
-                                        <Card.Img variant="top" src={item?.image} className="pt-2" />
-                                        <Card.Body>
-                                            <Card.Title>{item?.title}</Card.Title>
-                                            <Card.Text>
-                                                {item?.desc}
-                                            </Card.Text>
-                                        </Card.Body>
-                                    </Link>
-                                </Card>
-
-                            )
-                        })}
-                    </Row>
-                </div>
+                <Row xs={1} md={4} className="d-flex justify-content-center">
+                    {data?.filter((item) => {
+                        return search.toLowerCase() === ''
+                            ? item
+                            : item.title.toLowerCase().includes(search);
+                    }).map((item, id) => {
+                        return (
+                            <Card style={{ width: '18rem' }} className="my-4 mx-3">
+                                {/* <p className='position-absolute top-0 end-0 m-3'>
+                                        <ModalLogin />
+                                    </p> */}
+                                <img src={book} alt="" className='position-absolute top-0 end-0 m-3' onClick={login} />
+                                <Link to={`/detail-after-login/${item.id}`} className='text-decoration-none text-dark'>
+                                    <Card.Img variant="top" src={item?.image} className="pt-2" />
+                                    <Card.Body>
+                                        <Card.Title>{item?.title}</Card.Title>
+                                        <Card.Text>
+                                            {item?.desc}
+                                        </Card.Text>
+                                    </Card.Body>
+                                </Link>
+                            </Card>
+                        )
+                    })}
+                </Row>
             </div>
         </>
     )

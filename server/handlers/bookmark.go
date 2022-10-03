@@ -70,10 +70,6 @@ func (h *handlerBookmark) CreateBookmark(w http.ResponseWriter, r *http.Request)
 	userInfo := r.Context().Value("userInfo").(jwt.MapClaims)
 	userId := int(userInfo["id"].(float64))
 
-	// fmt.Println(userId)
-	// dataContex := r.Context().Value("dataFile")
-	// filename := dataContex.(string)
-
 	artikel_id, _ := strconv.Atoi(r.FormValue("artikel_id"))
 
 	request := bookmarksdto.CreateBookmarkRequest{
@@ -91,8 +87,8 @@ func (h *handlerBookmark) CreateBookmark(w http.ResponseWriter, r *http.Request)
 	}
 
 	bookmark := models.Bookmark{
-		UserID: request.UserID,
-		// Artikel_Id: request.Artikel_Id,
+		UserID:    request.UserID,
+		ArtikelId: request.Artikel_Id,
 	}
 
 	data, err := h.BookmarkRepository.CreateBookmark(bookmark)
@@ -103,10 +99,10 @@ func (h *handlerBookmark) CreateBookmark(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
-	// bookmark, _ = h.BookmarkRepository.GetBookmark(data.UserID)
+	bookmark, _ = h.BookmarkRepository.GetBookmark(data.UserID)
 
 	w.WriteHeader(http.StatusOK)
-	response := dto.SuccessResult{Code: http.StatusOK, Data: convertResponseBookmark(data)}
+	response := dto.SuccessResult{Code: http.StatusOK, Data: convertResponseBookmark(bookmark)}
 	json.NewEncoder(w).Encode(response)
 }
 
@@ -182,7 +178,8 @@ func (h *handlerBookmark) DeleteBookmark(w http.ResponseWriter, r *http.Request)
 
 func convertResponseBookmark(u models.Bookmark) bookmarksdto.BookmarkResponse {
 	return bookmarksdto.BookmarkResponse{
-		UserID: u.UserID,
-		// Artikel_Id: u.Artikel_Id,
+		UserID:     u.UserID,
+		Artikel_Id: u.ArtikelId,
+		// Artikel:    u.Artikel,
 	}
 }

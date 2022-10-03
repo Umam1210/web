@@ -9,8 +9,6 @@ type User struct {
 	Password string `json:"password" gorm:"type: varchar(255)"`
 	Phone    string `json:"phone" gorm:"type: varchar(255)"`
 	Addres   string `json:"addres" gorm:"type: varchar(255)"`
-	// Artikel   ArtikelResponse `json:"artikel" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
-	// ArtikelID int             `json:"artikel_id"`
 }
 
 // berfungsi untuk relasi

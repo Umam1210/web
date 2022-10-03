@@ -3,15 +3,14 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import icon from '../image/Icon2.png'
-import cat from '../image/cat.jpeg'
+import Tooltip from './Tooltip';
+
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import ModalRegister from './ModalRegister';
-import ModalLogin from './ModalLogin';
-import Tooltip from './Tooltip';
-import { Link } from "react-router-dom";
+import { Link,} from "react-router-dom";
 
 function Navbarlogin() {
+
     return (
         <div className='sticky-top d-flex'>
         <Navbar collapseOnSelect expand="lg" bg="" variant="" style={{backgroundColor:"#F2F2F2"}} className="w-100">

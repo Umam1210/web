@@ -15,8 +15,8 @@ import { useQuery } from 'react-query'
 function AddJourney() {
 
   let navigate = useNavigate();
-  const [categories, setCategories] = useState([]); //Store all category data
-  const [categoryId, setCategoryId] = useState([]); //Save the selected category id
+  // const [categories, setCategories] = useState([]); //Store all category data
+  // const [categoryId, setCategoryId] = useState([]); //Save the selected category id
   const [preview, setPreview] = useState(null); //For image preview
 
   const [form, setForm] = useState({
@@ -61,7 +61,7 @@ function AddJourney() {
       );
 
       formData.set("desc", form.desc);
-      form.user_id === 0 && form.user_id === "" ? (formData.set("user_id", data?.id)) : (formData.set("user_id", form.user_id))
+      // form.user_id === 0 && form.user_id === "" ? (formData.set("user_id", data?.id)) : (formData.set("user_id", form.user_id))
 
       console.log("form", form);
 
@@ -69,7 +69,7 @@ function AddJourney() {
       const response = await API.post("/artikel", formData, config);
       console.log(response);
 
-      navigate("/home");
+      navigate("/profile");
     } catch (error) {
       console.log(error);
     }
@@ -82,65 +82,63 @@ function AddJourney() {
   const [formValues, setFormValues] = useState([{ title: "", link: "" }]);
 
 
-  let addFormFields = () => {
-    setFormValues([...formValues, { title: "", link: "" }]);
-  };
+  // let addFormFields = () => {
+  //   setFormValues([...formValues, { title: "", link: "" }]);
+  // };
 
-  let handleSubmit1 = (event) => {
-    event.preventDefault();
-    alert(JSON.stringify(formValues));
-  };
+  // let handleSubmit1 = (event) => {
+  //   event.preventDefault();
+  //   alert(JSON.stringify(formValues));
+  // };
 
-  const [state, dispatch] = useContext(UserContext)
-  // let { id } = useParams();
-  // console.log("state", state)
-  let { data } = useQuery('usersCache', async () => {
-      const response = await API.get('/check-auth');
-      console.log("ini response",response)
-      return response.data.data;
-    });
+  // const [state, dispatch] = useContext(UserContext)
+  // // let { id } = useParams();
+  // // console.log("state", state)
+  // let { data } = useQuery('usersCache', async () => {
+  //   const response = await API.get('/check-auth');
+  //   console.log("ini response", response)
+  //   return response.data.data;
+  // });
 
-    console.log(" ini data", data);
+  // console.log(" ini data", data);
 
 
-    const checkUser = async () => {
-      try {
-        const response = await API.get('/check-auth');
-    
-        // If the token incorrect
-        if (response.status === 404) {
-          return dispatch({
-            type: 'AUTH_ERROR',
-          });
-        }
-    
-        // Get user data
-        let payload = response.data.data.user;
-        // Get token from local storage
-        payload.token = localStorage.token;
-    
-        // Send data to useContext
-        dispatch({
-          type: 'USER_SUCCESS',
-          payload,
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    
-    useEffect(() => {
-      if (localStorage.token) {
-        checkUser();}
-    }, [])
+  // const checkUser = async () => {
+  //   try {
+  //     const response = await API.get('/check-auth');
+
+  //     // If the token incorrect
+  //     if (response.status === 404) {
+  //       return dispatch({
+  //         type: 'AUTH_ERROR',
+  //       });
+  //     }
+
+  //     // Get user data
+  //     let payload = response.data.data.user;
+  //     // Get token from local storage
+  //     payload.token = localStorage.token;
+
+  //     // Send data to useContext
+  //     dispatch({
+  //       type: 'USER_SUCCESS',
+  //       payload,
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   if (localStorage.token) {
+  //     checkUser();
+  //   }
+  // }, [])
 
 
   return (
     <>
       <Navbarlogin />
-
-
-
       <form onSubmit={(e) => handleSubmit.mutate(e)}>
         <div className='mx-5'>
           <Form.Group className="my-3" controlId="formBasicEmail">
@@ -167,8 +165,8 @@ function AddJourney() {
             <Form.Control
               type="file"
               name="image"
-            //  value={image}
-            onChange={handleChange}
+              //  value={image}
+              onChange={handleChange}
 
             />
             <InputGroup.Text id="basic-addon1">
@@ -182,16 +180,16 @@ function AddJourney() {
               name="desc"
               // value={desc}
               placeholder="desc"
-                onChange={handleChange}
+              onChange={handleChange}
               style={{ height: '100px' }}
 
             />
           </FloatingLabel>
           <div className="d-flex justify-content-end">
-              <Button type="submit" variant="" className="px-5 py-1 mt-3 mx-5 ">
-                Post
-              </Button >
-            </div>
+            <Button type="submit" variant="primary" className="px-5 py-1 mt-3 mx-5 ">
+              Post
+            </Button >
+          </div>
 
         </div>
       </form>

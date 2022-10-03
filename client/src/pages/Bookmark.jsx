@@ -5,9 +5,9 @@ import Navbarlogin from '../components/NavbarLogin'
 function Bookmark() {
   return (
     <>
-    <Navbarlogin />
-    <h1>Bookmark</h1>
-    <CardBookmark />
+      <Navbarlogin />
+      <h1 className='my-3 mx-5'>Bookmark</h1>
+      <CardBookmark />
     </>
   )
 }
