@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbarlogin from '../components/NavbarLogin'
 
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { API } from '../config/api'
 import logo from '../image/Bookmark2.png'
@@ -9,11 +9,31 @@ import logo from '../image/Bookmark2.png'
 function Detail() {
 
   let { id } = useParams();
-  let { data } = useQuery('detailCache', async () => {
+
+  let { data } = useQuery('artikelCache', async () => {
     const response = await API.get('/artikel/' + id);
-    console.log("ini detail", response)
     return response.data.data;
   });
+
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
+      try {
+          e.preventDefault();
+
+          const config = {
+              headers: {
+                  "Content-type": "application/json",
+              },
+          };
+          const body = JSON.stringify({
+              artikel_id: parseInt(id)
+          });
+          await API.post("/bookmark", body, config);
+          navigate("/bookmark");
+      } catch (error) {
+          console.log(error);
+      }
+  };
 
 
   let today = new Date();
@@ -40,6 +60,7 @@ function Detail() {
       className='position-absolute end-0 mt-3'
       style={{marginRight:"80px"}}
       width={"3%"}
+      onClick={handleSubmit}
        />
         <img src={data?.image} alt="" className='rounded ' width={"100%"} />
       </div>

@@ -2,11 +2,13 @@ package handlers
 
 import (
 	"encoding/json"
+	artikelsdto "journey/dto/artikel"
 	bookmarksdto "journey/dto/bookmark"
 	dto "journey/dto/result"
 	"journey/models"
 	"journey/repositories"
 	"net/http"
+	"os"
 	"strconv"
 
 	"github.com/go-playground/validator/v10"
@@ -27,18 +29,18 @@ func HandlerBookmark(BookmarkRepository repositories.BookmarkRepository) *handle
 func (h *handlerBookmark) FindBookmarks(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	artikels, err := h.BookmarkRepository.FindBookmarks()
+	bookmark, err := h.BookmarkRepository.FindBookmarks()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(err)
 	}
 
-	// for i, p := range artikels {
-	// 	artikels[i].Image = os.Getenv("PATH_FILE") + p.Image
-	// }
+	for i, p := range bookmark {
+		bookmark[i].Artikel.Image = os.Getenv("PATH_FILE") + p.Artikel.Image
+	}
 
 	w.WriteHeader(http.StatusOK)
-	response := dto.SuccessResult{Code: http.StatusOK, Data: artikels}
+	response := dto.SuccessResult{Code: http.StatusOK, Data: bookmark}
 	json.NewEncoder(w).Encode(response)
 }
 
@@ -57,7 +59,7 @@ func (h *handlerBookmark) GetBookmark(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// artikel.Image = os.Getenv("PATH_FILE") + artikel.Image
+	bookmark.Artikel.Image = os.Getenv("PATH_FILE") + bookmark.Artikel.Image
 
 	w.WriteHeader(http.StatusOK)
 	response := dto.SuccessResult{Code: http.StatusOK, Data: convertResponseBookmark(bookmark)}
@@ -180,6 +182,7 @@ func convertResponseBookmark(u models.Bookmark) bookmarksdto.BookmarkResponse {
 	return bookmarksdto.BookmarkResponse{
 		UserID:     u.UserID,
 		Artikel_Id: u.ArtikelId,
-		// Artikel:    u.Artikel,
+		User:       models.User{},
+		Artikel:    artikelsdto.ArtikelResponse{},
 	}
 }

@@ -20,7 +20,7 @@ function CardProfile() {
 
   let user = useQuery('usersCache', async () => {
     const response = await API.get('/check-auth');
-    // console.log("ini response user",response)
+    console.log("ini response user",response)
     return response.data.data;
   });
 

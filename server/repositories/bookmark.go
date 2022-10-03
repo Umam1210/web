@@ -20,7 +20,7 @@ func RepositoryBookmark(db *gorm.DB) *repository {
 
 func (r *repository) FindBookmarks() ([]models.Bookmark, error) {
 	var bookmarks []models.Bookmark
-	err := r.db.Preload("Artikel").Find(&bookmarks).Error
+	err := r.db.Preload("Artikel").Preload("User").Find(&bookmarks).Error
 
 	return bookmarks, err
 }

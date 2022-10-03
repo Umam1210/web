@@ -32,7 +32,7 @@ function Home() {
 
     function login() {
         handleShow(<ModalLogin />)
-        alert("hallo")
+        alert("Harus Login terlebih dahulu")
     }
 
     return (
