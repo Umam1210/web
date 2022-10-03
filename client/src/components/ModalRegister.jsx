@@ -97,7 +97,7 @@ function ModalRegister() {
       <form onSubmit={(e) => handleSubmit.mutate(e)} >
         <Modal show={show} onHide={handleClose} style={{ width: "400px" }} className="position-absolute top-50 start-50 translate-middle">
           {message && message}
-          <img src={maps} alt="" className='position-absolute top-0 start-0 rounded-top' />
+          <img src={maps} alt="" className='position-absolute top-0 start-0 rounded-top' width={"12%"} />
           <img src={leaf} alt="" className='position-absolute top-0 end-0 rounded-top' width={"20%"} />
           <div className="d-flex justify-content-center py-4">
             <div>
@@ -111,7 +111,7 @@ function ModalRegister() {
               <Form.Label>Full Name</Form.Label>
               <input
                 type="text"
-                placeholder="Full Name"
+                // placeholder="Full Name"
                 value={name}
                 name="name"
                 onChange={handleChange}
@@ -122,7 +122,7 @@ function ModalRegister() {
               <Form.Label>Email</Form.Label>
               <input
                 type="email"
-                placeholder="Email"
+                // placeholder="Email"
                 value={email}
                 name="email"
                 onChange={handleChange}
@@ -135,7 +135,7 @@ function ModalRegister() {
               <Form.Label>Password</Form.Label>
               <input
                 type="password"
-                placeholder="Password"
+                // placeholder="Password"
                 value={password}
                 name="password"
                 onChange={handleChange}
@@ -148,7 +148,7 @@ function ModalRegister() {
               <Form.Label>Phone</Form.Label>
               <input
                 type="text"
-                placeholder="Phone"
+                // placeholder="Phone"
                 value={phone}
                 name="phone"
                 onChange={handleChange}
@@ -161,7 +161,7 @@ function ModalRegister() {
               <Form.Label>Address</Form.Label>
               <input
                 type="text"
-                placeholder="Address"
+                // placeholder="Address"
                 value={address}
                 name="address"
                 onChange={handleChange}
@@ -169,7 +169,7 @@ function ModalRegister() {
               />
             </Form.Group>
           </Modal.Body>
-          <Modal.Footer>
+          <Modal.Footer style={{ border: "none" }}>
             <Button variant="primary"
               onClick={(e) => {
                 handleClose()

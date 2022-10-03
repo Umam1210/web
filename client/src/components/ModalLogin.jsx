@@ -96,7 +96,7 @@ function ModalLogin() {
       </Button>
       <form onSubmit={(e) => handleSubmit.mutate(e)}  >
         <Modal show={show} onHide={handleClose} style={{ width:"400px"}} className="position-absolute top-50 start-50 translate-middle" >
-            <img src={maps} alt="" className='position-absolute top-0 start-0 rounded-top' />
+            <img src={maps} alt="" className='position-absolute top-0 start-0 rounded-top' width={"12%"}/>
             <img src={leaf} alt="" className='position-absolute top-0 end-0 rounded-top' width={"20%"} />
             <div className="d-flex justify-content-center py-4">
               <div>

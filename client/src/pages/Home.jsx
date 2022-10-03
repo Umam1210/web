@@ -75,7 +75,10 @@ function Home() {
                                 <Link to={`/detail-after-login/${item.id}`} className='text-decoration-none text-dark'>
                                     <Card.Img variant="top" src={item?.image} className="pt-2" />
                                     <Card.Body>
-                                        <Card.Title>{item?.title}</Card.Title>
+                                    <div className='d-flex'>
+                                                <Card.Title className='me-auto'>{item?.title}</Card.Title>
+                                                <p className='p-2'>{item?.user.name}</p>
+                                            </div>
                                         <Card.Text>
                                             {item?.desc}
                                         </Card.Text>
