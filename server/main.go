@@ -6,6 +6,7 @@ import (
 	"journey/pkg/mysql"
 	"journey/routes"
 	"net/http"
+	"os"
 
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
@@ -33,6 +34,7 @@ func main() {
 
 	r.PathPrefix("/uploads").Handler(http.StripPrefix("/uploads/", http.FileServer(http.Dir("./uploads")))) // add this code
 
-	fmt.Println("server running localhost:5000")
+	var port = os.Getenv("PORT")
+	fmt.Println("server running localhost:" + port)
 	http.ListenAndServe("localhost:5000", handlers.CORS(AllowedHeaders, AllowedMethods, AllowedOrigins)(r))
 }
