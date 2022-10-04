@@ -30,7 +30,7 @@ function CardProfile() {
   return (
     <>
       <Row xs={1} md={4} className="d-flex justify-content-center">
-        {data?.filter((item) => item.user_id === user.data.id).map((item, id) => {
+        {data?.filter((item) => item.user_id === user?.data?.id).map((item, id) => {
           return (
             <Card style={{ width: '18rem' }} className="my-4 mx-3">
               <Link to="/bookmark">

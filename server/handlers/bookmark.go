@@ -72,11 +72,19 @@ func (h *handlerBookmark) CreateBookmark(w http.ResponseWriter, r *http.Request)
 	userInfo := r.Context().Value("userInfo").(jwt.MapClaims)
 	userId := int(userInfo["id"].(float64))
 
-	artikel_id, _ := strconv.Atoi(r.FormValue("artikel_id"))
+	// artikel_id, _ := strconv.Atoi(r.FormValue("artikel_id"))
 
-	request := bookmarksdto.CreateBookmarkRequest{
-		UserID:     userId,
-		Artikel_Id: artikel_id,
+	// request := bookmarksdto.CreateBookmarkRequest{
+	// 	UserID:     userId,
+	// 	Artikel_Id: artikel_id,
+	// }
+
+	request := new(bookmarksdto.CreateBookmarkRequest)
+	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		response := dto.ErrorResult{Code: http.StatusBadRequest, Message: err.Error()}
+		json.NewEncoder(w).Encode(response)
+		return
 	}
 
 	validation := validator.New()
@@ -89,7 +97,7 @@ func (h *handlerBookmark) CreateBookmark(w http.ResponseWriter, r *http.Request)
 	}
 
 	bookmark := models.Bookmark{
-		UserID:    request.UserID,
+		UserID:    userId,
 		ArtikelId: request.Artikel_Id,
 	}
 
@@ -101,10 +109,10 @@ func (h *handlerBookmark) CreateBookmark(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
-	bookmark, _ = h.BookmarkRepository.GetBookmark(data.UserID)
+	// bookmark, _ = h.BookmarkRepository.GetBookmark(data.UserID)
 
 	w.WriteHeader(http.StatusOK)
-	response := dto.SuccessResult{Code: http.StatusOK, Data: convertResponseBookmark(bookmark)}
+	response := dto.SuccessResult{Code: http.StatusOK, Data: convertResponseBookmark(data)}
 	json.NewEncoder(w).Encode(response)
 }
 
